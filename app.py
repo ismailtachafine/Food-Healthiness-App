@@ -29,7 +29,7 @@ default_prompt="""
 
 ## Function to load Google Gemini Pro Vision API And get response
 
-def get_gemini_repsonse(image, prompt):
+def get_gemini_repsonse(image, prompt=None):
     if prompt is None:
         prompt = default_prompt
     model = genai.GenerativeModel('gemini-pro-vision')
