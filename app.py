@@ -29,14 +29,12 @@ default_prompt="""
 
 ## Function to load Google Gemini Pro Vision API And get response
 
-def get_gemini_repsonse(image, prompt=None):
-    if prompt is None:
-        prompt = default_prompt
+def get_gemini_response(prompt,image):
     model = genai.GenerativeModel('gemini-pro-vision')
-    response = model.generate_content([prompt, image[0]])
+    if prompt == "":
+       prompt = default_prompt
+    response = model.generate_content([prompt,image[0]])
     return response.text
-
-
 
 
 def input_image_setup(uploaded_file):
@@ -74,10 +72,8 @@ submit=st.button("Generate Analysis")
 
 ## If submit button is clicked
 
-if submit:
+if input_prompt or submit:
     image_data = input_image_setup(uploaded_file)
-    response = get_gemini_repsonse(image_data)
+    response = get_gemini_response(input_prompt, image_data)
     st.subheader("Analysis Results:")
     st.write(response)
-
-
